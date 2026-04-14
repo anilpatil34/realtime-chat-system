@@ -208,9 +208,3 @@ cd frontend && npm run lint
 # Run frontend build
 cd frontend && npm run build
 ```
-
----
-
-## 📄 License
-
-MIT License — feel free to use this project for learning and portfolios.
