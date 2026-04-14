@@ -1,0 +1,22 @@
+# .gitignore
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.env
+*.log
+db.sqlite3
+media/
+staticfiles/
+logs/
+.venv/
+venv/
+node_modules/
+.next/
+.env.local
+.env*.local
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
