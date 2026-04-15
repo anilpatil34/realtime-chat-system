@@ -56,6 +56,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://realtime-chat-system-neon.vercel.app"
+]
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -170,10 +174,11 @@ SIMPLE_JWT = {
 # =============================================================================
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,http://127.0.0.1:3000',
+    default='http://localhost:3000,http://127.0.0.1:3000,https://realtime-chat-system-neon.vercel.app',
     cast=Csv()
 )
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # =============================================================================
 # INTERNATIONALIZATION
