@@ -2,9 +2,9 @@
 Django settings for the Real-Time Chat System.
 Production-ready configuration with MySQL, Redis, JWT, and Django Channels.
 """
-import os , pymysql
+
+import os
 from pathlib import Path
-pymysql.install_as_MySQLdb()
 from datetime import timedelta
 from decouple import config, Csv
 
@@ -80,26 +80,13 @@ ASGI_APPLICATION = 'config.asgi.application'
 # =============================================================================
 # DATABASE — MySQL (Production) / SQLite (Development fallback)
 # =============================================================================
-DB_ENGINE = config('DB_ENGINE', default='sqlite3')
 
-if DB_ENGINE == 'mysql':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT', default='3306'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 
 # =============================================================================
 # CHANNEL LAYERS — Redis (Production) / In-Memory (Development)
@@ -198,7 +185,7 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 # =============================================================================
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
