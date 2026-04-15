@@ -80,6 +80,9 @@ ASGI_APPLICATION = 'config.asgi.application'
 # =============================================================================
 # DATABASE — MySQL (Production) / SQLite (Development fallback)
 # =============================================================================
+## locally dbsqlite3 is best database for project work and run succesfully in this
+# and in .env and .env.example file logic of dbsqlite3 need to change for work 
+# For production level by render postgreysql databse works 
 
 import dj_database_url
 DATABASES = {
@@ -91,7 +94,7 @@ DATABASES = {
 # =============================================================================
 # CHANNEL LAYERS — Redis (Production) / In-Memory (Development)
 # =============================================================================
-REDIS_URL = config('REDIS_URL', default='')
+REDIS_URL = config('REDIS_URL', default=None)
 
 if REDIS_URL:
     CHANNEL_LAYERS = {
@@ -103,7 +106,6 @@ if REDIS_URL:
         },
     }
 else:
-    # In-memory channel layer for local development without Redis
     CHANNEL_LAYERS = {
         'default': {
             'BACKEND': 'channels.layers.InMemoryChannelLayer',
